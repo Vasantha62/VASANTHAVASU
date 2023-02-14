@@ -44,45 +44,35 @@
  //export let userData=createContext()
  //import React, { useState } from "react";
 //import firebase from "firebase";
+import React from 'react';
+import PropertyList from './PropertyList';
 
-import React, { useState } from 'react';
-import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
-import LogoutButton from './LogoutButton';
+const properties = [
+  {
+    id: 1,
+    address: '123 Main St',
+    type: 'Single Family Home',
+    price: '$500,000',
+    image: 'https://example.com/property1.jpg',
+  },
+  {
+    id: 2,
+    address: '456 Elm St',
+    type: 'Condo',
+    price: '$250,000',
+    image: 'https://example.com/property2.jpg',
+  },
+  // additional property objects here
+];
 
-function App() {
-  const [user, setUser] = useState(null);
-
-  const handleLogin = (username, password) => {
-    // TODO: Make API call to log in user
-    setUser({ username });
-  };
-
-  const handleSignup = (username, email, password) => {
-    // TODO: Make API call to sign up user
-    setUser({ username });
-  };
-
-  const handleLogout = () => {
-    // TODO: Make API call to log out user
-    setUser(null);
-  };
-
+const App = () => {
   return (
-    <div className="App">
-      {user ? (
-        <div>
-          <p>Welcome, {user.username}!</p>
-          <LogoutButton onLogout={handleLogout} />
-        </div>
-      ) : (
-        <div>
-          <LoginForm onLogin={handleLogin} />
-          <SignupForm onSignup={handleSignup} />
-        </div>
-      )}
+    <div>
+      <h1>Properties for Sale</h1>
+      <PropertyList properties={properties} />
     </div>
   );
-}
+};
 
 export default App;
+
