@@ -43,36 +43,39 @@
 //import Xml from "./components/Xml"
  //export let userData=createContext()
  //import React, { useState } from "react";
-//import firebase from "firebase";
-import React from 'react';
-import PropertyList from './PropertyList';
-
-const properties = [
-  {
-    id: 1,
-    address: '123 Main St',
-    type: 'Single Family Home',
-    price: '$500,000',
-    image: 'https://example.com/property1.jpg',
-  },
-  {
-    id: 2,
-    address: '456 Elm St',
-    type: 'Condo',
-    price: '$250,000',
-    image: 'https://example.com/property2.jpg',
-  },
-  // additional property objects here
-];
-
-const App = () => {
-  return (
-    <div>
-      <h1>Properties for Sale</h1>
-      <PropertyList properties={properties} />
-    </div>
-  );
-};
-
-export default App;
-
+ import React, { useState } from 'react';
+ import PropertyList from './PropertyList';
+ import PropertySearch from './PropertySearch';
+ 
+ const allProperties = [
+   {
+     id: 1,
+     location: 'New York',
+     type: 'Single Family Home',
+     price: '$500,000',
+     image: 'https://example.com/property1.jpg',
+   },
+   {
+     id: 2,
+     location: 'San Francisco',
+     type: 'Condo',
+     price: '$250,000',
+     image: 'https://example.com/property2.jpg',
+   },
+   // additional property objects here
+ ];
+ 
+ const App = () => {
+   const [filteredProperties, setFilteredProperties] = useState(allProperties);
+ 
+   return (
+     <div>
+       <h1>Properties for Sale</h1>
+       <PropertySearch properties={allProperties} setFilteredProperties={setFilteredProperties} />
+       <PropertyList properties={filteredProperties} />
+     </div>
+   );
+ };
+ 
+ export default App;
+ 
