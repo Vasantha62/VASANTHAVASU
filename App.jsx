@@ -44,38 +44,43 @@
  //export let userData=createContext()
  //import React, { useState } from "react";
  import React, { useState } from 'react';
- import PropertyList from './PropertyList';
- import PropertySearch from './PropertySearch';
- 
- const allProperties = [
-   {
-     id: 1,
-     location: 'New York',
-     type: 'Single Family Home',
-     price: '$500,000',
-     image: 'https://example.com/property1.jpg',
-   },
-   {
-     id: 2,
-     location: 'San Francisco',
-     type: 'Condo',
-     price: '$250,000',
-     image: 'https://example.com/property2.jpg',
-   },
-   // additional property objects here
- ];
- 
- const App = () => {
-   const [filteredProperties, setFilteredProperties] = useState(allProperties);
- 
-   return (
-     <div>
-       <h1>Properties for Sale</h1>
-       <PropertySearch properties={allProperties} setFilteredProperties={setFilteredProperties} />
-       <PropertyList properties={filteredProperties} />
-     </div>
-   );
- };
- 
- export default App;
- 
+import PropertyList from './PropertyList';
+import PropertyDetail from './PropertyDetail';
+
+const allProperties = [
+  {
+    id: 1,
+    location: 'New York',
+    type: 'Single Family Home',
+    price: '$500,000',
+    image: 'https://example.com/property1.jpg',
+    description: 'This beautiful home has 4 bedrooms and 3 bathrooms.',
+  },
+  {
+    id: 2,
+    location: 'San Francisco',
+    type: 'Condo',
+    price: '$250,000',
+    image: 'https://example.com/property2.jpg',
+    description: 'This cozy condo has 1 bedroom and 1 bathroom.',
+  },
+  // additional property objects here
+];
+
+const App = () => {
+  const [selectedProperty, setSelectedProperty] = useState(null);
+
+  const handlePropertySelect = (property) => {
+    setSelectedProperty(property);
+  };
+
+  return (
+    <div>
+      <h1>Properties for Sale</h1>
+      <PropertyList properties={allProperties} onPropertySelect={handlePropertySelect} />
+      {selectedProperty && <PropertyDetail property={selectedProperty} />}
+    </div>
+  );
+};
+
+export default App;
