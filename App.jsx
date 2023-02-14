@@ -44,43 +44,42 @@
  //export let userData=createContext()
  //import React, { useState } from "react";
  import React, { useState } from 'react';
-import PropertyList from './PropertyList';
-import PropertyDetail from './PropertyDetail';
 
-const allProperties = [
-  {
-    id: 1,
-    location: 'New York',
-    type: 'Single Family Home',
-    price: '$500,000',
-    image: 'https://example.com/property1.jpg',
-    description: 'This beautiful home has 4 bedrooms and 3 bathrooms.',
-  },
-  {
-    id: 2,
-    location: 'San Francisco',
-    type: 'Condo',
-    price: '$250,000',
-    image: 'https://example.com/property2.jpg',
-    description: 'This cozy condo has 1 bedroom and 1 bathroom.',
-  },
-  // additional property objects here
-];
-
-const App = () => {
-  const [selectedProperty, setSelectedProperty] = useState(null);
-
-  const handlePropertySelect = (property) => {
-    setSelectedProperty(property);
-  };
-
-  return (
-    <div>
-      <h1>Properties for Sale</h1>
-      <PropertyList properties={allProperties} onPropertySelect={handlePropertySelect} />
-      {selectedProperty && <PropertyDetail property={selectedProperty} />}
-    </div>
-  );
-};
-
-export default App;
+ const ContactForm = ({ agentEmail }) => {
+   const [name, setName] = useState('');
+   const [email, setEmail] = useState('');
+   const [message, setMessage] = useState('');
+ 
+   const handleSubmit = (event) => {
+     event.preventDefault();
+ 
+     const mailtoLink = `mailto:${agentEmail}?subject=Property Inquiry&body=${encodeURIComponent(message)}`;
+ 
+     window.location.href = mailtoLink;
+ 
+     setName('');
+     setEmail('');
+     setMessage('');
+   };
+ 
+   return (
+     <form onSubmit={handleSubmit}>
+       <div>
+         <label htmlFor="name">Name:</label>
+         <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)} required />
+       </div>
+       <div>
+         <label htmlFor="email">Email:</label>
+         <input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+       </div>
+       <div>
+         <label htmlFor="message">Message:</label>
+         <textarea id="message" value={message} onChange={(event) => setMessage(event.target.value)} required></textarea>
+       </div>
+       <button type="submit">Send Email</button>
+     </form>
+   );
+ };
+ 
+ export default ContactForm;
+ 
